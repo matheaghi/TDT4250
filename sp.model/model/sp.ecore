@@ -2,12 +2,56 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sp" nsURI="platform:/plugin/TDT4250.sp.model/model/sp.ecore"
     nsPrefix="sp">
-  <eClassifiers xsi:type="ecore:EClass" name="Organization"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Department"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StudyDirection"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Course"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Semester"/>
-  <eClassifiers xsi:type="ecore:EClass" name="CourseSlot"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ElectablesCourseSlot"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ObligatoryCourseSlot"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Organization">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="departments" upperBound="-1"
+        eType="#//Department" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Department">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="programmes" upperBound="-1"
+        eType="#//StudyPlan" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" upperBound="-1"
+        eType="#//Course" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abbreviation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StudyPlan">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="specialization" upperBound="-1"
+        eType="#//StudyPlan"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semesters" upperBound="-1"
+        eType="#//SemesterInstance" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="semesterOffered" upperBound="2"
+        eType="#//Semester"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credits" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SemesterInstance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="coursesSlots" upperBound="-1"
+        eType="#//CourseSlot" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="semester" lowerBound="1"
+        eType="#//Semester"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseSlot" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credits" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElectablesCourseSlot" eSuperTypes="#//CourseSlot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" lowerBound="2"
+        upperBound="-1" eType="#//Course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObligatoryCourseSlot" eSuperTypes="#//CourseSlot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="course" lowerBound="1"
+        eType="#//Course"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Semester">
+    <eLiterals name="Autumn"/>
+    <eLiterals name="Spring" value="1"/>
+  </eClassifiers>
 </ecore:EPackage>
