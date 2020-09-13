@@ -68,6 +68,12 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElectablesCourseSlot" eSuperTypes="#//CourseSlot">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="checkThatCreditMatchesCreditsAndSlots"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+      <details key="checkThatCreditMatchesCreditsAndSlots" value="self.courses -> collect( credit | self.courses.credit )"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="courses" lowerBound="2"
         upperBound="-1" eType="#//Course"/>
   </eClassifiers>
