@@ -28,6 +28,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="#//Level"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Course">
+    <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
+      <details key="creditsIsAboveZero" value="self.credit > 0f"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+      <details key="constraints" value="creditsIsAboveZero"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//CourseCode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="semesterOffered" upperBound="2"
