@@ -764,10 +764,10 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 			   "validationDelegates", "http://www.eclipse.org/acceleo/query/1.0"
 		   });
 		addAnnotation
-		  (electablesCourseSlotEClass,
+		  (semesterInstanceEClass,
 		   source,
 		   new String[] {
-			   "constraints", "CreditsMatchesCoursesAndSlots"
+			   "constraints", "CourseCreditsSumToWorkload"
 		   });
 		addAnnotation
 		  (obligatoryCourseSlotEClass,
@@ -786,10 +786,10 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 	protected void create_1Annotations() {
 		String source = "http://www.eclipse.org/acceleo/query/1.0";
 		addAnnotation
-		  (electablesCourseSlotEClass,
+		  (semesterInstanceEClass,
 		   source,
 		   new String[] {
-			   "CreditsMatchesCoursesAndSlots", null
+			   "CourseCreditsSumToWorkload", "(self.courseSlots.credits -> sum()).toString()=(self.intendedWorkload).toString()"
 		   });
 		addAnnotation
 		  (obligatoryCourseSlotEClass,

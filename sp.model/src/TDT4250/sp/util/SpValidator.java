@@ -159,7 +159,46 @@ public class SpValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateSemesterInstance(SemesterInstance semesterInstance, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return validate_EveryDefaultConstraint(semesterInstance, diagnostics, context);
+		if (!validate_NoCircularContainment(semesterInstance, diagnostics, context)) return false;
+		boolean result = validate_EveryMultiplicityConforms(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryProxyResolves(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_UniqueID(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryKeyUnique(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSemesterInstance_CourseCreditsSumToWorkload(semesterInstance, diagnostics, context);
+		return result;
+	}
+
+	/**
+	 * The cached validation expression for the CourseCreditsSumToWorkload constraint of '<em>Semester Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected static final String SEMESTER_INSTANCE__COURSE_CREDITS_SUM_TO_WORKLOAD__EEXPRESSION = "(self.courseSlots.credits -> sum()).toString()=(self.intendedWorkload).toString()";
+
+	/**
+	 * Validates the CourseCreditsSumToWorkload constraint of '<em>Semester Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSemesterInstance_CourseCreditsSumToWorkload(SemesterInstance semesterInstance, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return
+			validate
+				(SpPackage.Literals.SEMESTER_INSTANCE,
+				 semesterInstance,
+				 diagnostics,
+				 context,
+				 "http://www.eclipse.org/acceleo/query/1.0",
+				 "CourseCreditsSumToWorkload",
+				 SEMESTER_INSTANCE__COURSE_CREDITS_SUM_TO_WORKLOAD__EEXPRESSION,
+				 Diagnostic.ERROR,
+				 DIAGNOSTIC_SOURCE,
+				 0);
 	}
 
 	/**
@@ -177,45 +216,7 @@ public class SpValidator extends EObjectValidator {
 	 * @generated
 	 */
 	public boolean validateElectablesCourseSlot(ElectablesCourseSlot electablesCourseSlot, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		if (!validate_NoCircularContainment(electablesCourseSlot, diagnostics, context)) return false;
-		boolean result = validate_EveryMultiplicityConforms(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryDataValueConforms(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryReferenceIsContained(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryBidirectionalReferenceIsPaired(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryProxyResolves(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_UniqueID(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryKeyUnique(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(electablesCourseSlot, diagnostics, context);
-		if (result || diagnostics != null) result &= validateElectablesCourseSlot_CreditsMatchesCoursesAndSlots(electablesCourseSlot, diagnostics, context);
-		return result;
-	}
-
-	/**
-	 * Validates the CreditsMatchesCoursesAndSlots constraint of '<em>Electables Course Slot</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateElectablesCourseSlot_CreditsMatchesCoursesAndSlots(ElectablesCourseSlot electablesCourseSlot, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		// TODO implement the constraint
-		// -> specify the condition that violates the constraint
-		// -> verify the diagnostic details, including severity, code, and message
-		// Ensure that you remove @generated or mark it @generated NOT
-		if (false) {
-			if (diagnostics != null) {
-				diagnostics.add
-					(createDiagnostic
-						(Diagnostic.ERROR,
-						 DIAGNOSTIC_SOURCE,
-						 0,
-						 "_UI_GenericConstraint_diagnostic",
-						 new Object[] { "CreditsMatchesCoursesAndSlots", getObjectLabel(electablesCourseSlot, context) },
-						 new Object[] { electablesCourseSlot },
-						 context));
-			}
-			return false;
-		}
-		return true;
+		return validate_EveryDefaultConstraint(electablesCourseSlot, diagnostics, context);
 	}
 
 	/**
