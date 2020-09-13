@@ -40,7 +40,20 @@
       </semesters>
       <semesters
           year="2021"
-          intendedWorkload="30.0"/>
+          intendedWorkload="30.0">
+        <courseSlots
+            xsi:type="sp:ObligatoryCourseSlot"
+            credits="7.5"
+            course="//@departments.0/@responsibleFor.2"/>
+        <courseSlots
+            xsi:type="sp:ObligatoryCourseSlot"
+            credits="15.0"
+            course="//@departments.0/@responsibleFor.1"/>
+        <courseSlots
+            xsi:type="sp:ElectablesCourseSlot"
+            credits="7.5"
+            courses="//@departments.2/@responsibleFor.1 //@departments.3/@responsibleFor.0"/>
+      </semesters>
     </programmes>
     <responsibleFor
         code="tdt4250"
