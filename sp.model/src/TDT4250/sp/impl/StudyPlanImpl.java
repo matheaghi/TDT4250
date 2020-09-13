@@ -2,6 +2,7 @@
  */
 package TDT4250.sp.impl;
 
+import TDT4250.sp.Level;
 import TDT4250.sp.SemesterInstance;
 import TDT4250.sp.SpPackage;
 import TDT4250.sp.StudyPlan;
@@ -109,7 +110,7 @@ public class StudyPlanImpl extends MinimalEObjectImpl.Container implements Study
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LEVEL_EDEFAULT = null;
+	protected static final Level LEVEL_EDEFAULT = Level.BACHELOR;
 
 	/**
 	 * The cached value of the '{@link #getLevel() <em>Level</em>}' attribute.
@@ -119,7 +120,7 @@ public class StudyPlanImpl extends MinimalEObjectImpl.Container implements Study
 	 * @generated
 	 * @ordered
 	 */
-	protected String level = LEVEL_EDEFAULT;
+	protected Level level = LEVEL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -211,7 +212,7 @@ public class StudyPlanImpl extends MinimalEObjectImpl.Container implements Study
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 
@@ -220,9 +221,9 @@ public class StudyPlanImpl extends MinimalEObjectImpl.Container implements Study
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLevel(String newLevel) {
-		String oldLevel = level;
-		level = newLevel;
+	public void setLevel(Level newLevel) {
+		Level oldLevel = level;
+		level = newLevel == null ? LEVEL_EDEFAULT : newLevel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SpPackage.STUDY_PLAN__LEVEL, oldLevel, level));
 	}
@@ -302,7 +303,7 @@ public class StudyPlanImpl extends MinimalEObjectImpl.Container implements Study
 				setName((String)newValue);
 				return;
 			case SpPackage.STUDY_PLAN__LEVEL:
-				setLevel((String)newValue);
+				setLevel((Level)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -352,7 +353,7 @@ public class StudyPlanImpl extends MinimalEObjectImpl.Container implements Study
 			case SpPackage.STUDY_PLAN__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SpPackage.STUDY_PLAN__LEVEL:
-				return LEVEL_EDEFAULT == null ? level != null : !LEVEL_EDEFAULT.equals(level);
+				return level != LEVEL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

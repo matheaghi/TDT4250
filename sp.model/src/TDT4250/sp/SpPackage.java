@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see TDT4250.sp.SpFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore validationDelegates='http://www.eclipse.org/acceleo/query/1.0'"
  * @generated
  */
 public interface SpPackage extends EPackage {
@@ -306,13 +307,22 @@ public interface SpPackage extends EPackage {
 	int COURSE__OFFERED_TO = 5;
 
 	/**
+	 * The feature id for the '<em><b>Access To All</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COURSE__ACCESS_TO_ALL = 6;
+
+	/**
 	 * The number of structural features of the '<em>Course</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COURSE_FEATURE_COUNT = 6;
+	int COURSE_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Course</em>' class.
@@ -600,6 +610,16 @@ public interface SpPackage extends EPackage {
 	int STATUS = 9;
 
 	/**
+	 * The meta object id for the '{@link TDT4250.sp.Level <em>Level</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see TDT4250.sp.Level
+	 * @see TDT4250.sp.impl.SpPackageImpl#getLevel()
+	 * @generated
+	 */
+	int LEVEL = 10;
+
+	/**
 	 * The meta object id for the '<em>Credits</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -607,7 +627,7 @@ public interface SpPackage extends EPackage {
 	 * @see TDT4250.sp.impl.SpPackageImpl#getCredits()
 	 * @generated
 	 */
-	int CREDITS = 10;
+	int CREDITS = 11;
 
 	/**
 	 * The meta object id for the '<em>Course Code</em>' data type.
@@ -617,7 +637,7 @@ public interface SpPackage extends EPackage {
 	 * @see TDT4250.sp.impl.SpPackageImpl#getCourseCode()
 	 * @generated
 	 */
-	int COURSE_CODE = 11;
+	int COURSE_CODE = 12;
 
 
 	/**
@@ -848,6 +868,17 @@ public interface SpPackage extends EPackage {
 	EReference getCourse_OfferedTo();
 
 	/**
+	 * Returns the meta object for the attribute '{@link TDT4250.sp.Course#isAccessToAll <em>Access To All</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Access To All</em>'.
+	 * @see TDT4250.sp.Course#isAccessToAll()
+	 * @see #getCourse()
+	 * @generated
+	 */
+	EAttribute getCourse_AccessToAll();
+
+	/**
 	 * Returns the meta object for class '{@link TDT4250.sp.SemesterInstance <em>Semester Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1016,6 +1047,16 @@ public interface SpPackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getStatus();
+
+	/**
+	 * Returns the meta object for enum '{@link TDT4250.sp.Level <em>Level</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Level</em>'.
+	 * @see TDT4250.sp.Level
+	 * @generated
+	 */
+	EEnum getLevel();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Float <em>Credits</em>}'.
@@ -1239,6 +1280,14 @@ public interface SpPackage extends EPackage {
 		EReference COURSE__OFFERED_TO = eINSTANCE.getCourse_OfferedTo();
 
 		/**
+		 * The meta object literal for the '<em><b>Access To All</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COURSE__ACCESS_TO_ALL = eINSTANCE.getCourse_AccessToAll();
+
+		/**
 		 * The meta object literal for the '{@link TDT4250.sp.impl.SemesterInstanceImpl <em>Semester Instance</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1377,6 +1426,16 @@ public interface SpPackage extends EPackage {
 		 * @generated
 		 */
 		EEnum STATUS = eINSTANCE.getStatus();
+
+		/**
+		 * The meta object literal for the '{@link TDT4250.sp.Level <em>Level</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see TDT4250.sp.Level
+		 * @see TDT4250.sp.impl.SpPackageImpl#getLevel()
+		 * @generated
+		 */
+		EEnum LEVEL = eINSTANCE.getLevel();
 
 		/**
 		 * The meta object literal for the '<em>Credits</em>' data type.

@@ -81,6 +81,8 @@ public class SpFactoryImpl extends EFactoryImpl implements SpFactory {
 				return createSemesterFromString(eDataType, initialValue);
 			case SpPackage.STATUS:
 				return createStatusFromString(eDataType, initialValue);
+			case SpPackage.LEVEL:
+				return createLevelFromString(eDataType, initialValue);
 			case SpPackage.CREDITS:
 				return createCreditsFromString(eDataType, initialValue);
 			case SpPackage.COURSE_CODE:
@@ -102,6 +104,8 @@ public class SpFactoryImpl extends EFactoryImpl implements SpFactory {
 				return convertSemesterToString(eDataType, instanceValue);
 			case SpPackage.STATUS:
 				return convertStatusToString(eDataType, instanceValue);
+			case SpPackage.LEVEL:
+				return convertLevelToString(eDataType, instanceValue);
 			case SpPackage.CREDITS:
 				return convertCreditsToString(eDataType, instanceValue);
 			case SpPackage.COURSE_CODE:
@@ -218,6 +222,26 @@ public class SpFactoryImpl extends EFactoryImpl implements SpFactory {
 	 * @generated
 	 */
 	public String convertStatusToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Level createLevelFromString(EDataType eDataType, String initialValue) {
+		Level result = Level.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertLevelToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link TDT4250.sp.Course#getCredits <em>Credits</em>}</li>
  *   <li>{@link TDT4250.sp.Course#getLevel <em>Level</em>}</li>
  *   <li>{@link TDT4250.sp.Course#getOfferedTo <em>Offered To</em>}</li>
+ *   <li>{@link TDT4250.sp.Course#isAccessToAll <em>Access To All</em>}</li>
  * </ul>
  *
  * @see TDT4250.sp.SpPackage#getCourse()
@@ -110,25 +111,28 @@ public interface Course extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Level</b></em>' attribute.
+	 * The literals are from the enumeration {@link TDT4250.sp.Level}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Level</em>' attribute.
-	 * @see #setLevel(String)
+	 * @see TDT4250.sp.Level
+	 * @see #setLevel(Level)
 	 * @see TDT4250.sp.SpPackage#getCourse_Level()
 	 * @model
 	 * @generated
 	 */
-	String getLevel();
+	Level getLevel();
 
 	/**
 	 * Sets the value of the '{@link TDT4250.sp.Course#getLevel <em>Level</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Level</em>' attribute.
+	 * @see TDT4250.sp.Level
 	 * @see #getLevel()
 	 * @generated
 	 */
-	void setLevel(String value);
+	void setLevel(Level value);
 
 	/**
 	 * Returns the value of the '<em><b>Offered To</b></em>' reference list.
@@ -141,5 +145,27 @@ public interface Course extends EObject {
 	 * @generated
 	 */
 	EList<StudyPlan> getOfferedTo();
+
+	/**
+	 * Returns the value of the '<em><b>Access To All</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Access To All</em>' attribute.
+	 * @see #setAccessToAll(boolean)
+	 * @see TDT4250.sp.SpPackage#getCourse_AccessToAll()
+	 * @model
+	 * @generated
+	 */
+	boolean isAccessToAll();
+
+	/**
+	 * Sets the value of the '{@link TDT4250.sp.Course#isAccessToAll <em>Access To All</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Access To All</em>' attribute.
+	 * @see #isAccessToAll()
+	 * @generated
+	 */
+	void setAccessToAll(boolean value);
 
 } // Course

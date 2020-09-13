@@ -3,6 +3,7 @@
 package TDT4250.sp.impl;
 
 import TDT4250.sp.Course;
+import TDT4250.sp.Level;
 import TDT4250.sp.Semester;
 import TDT4250.sp.SpPackage;
 import TDT4250.sp.StudyPlan;
@@ -35,6 +36,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  *   <li>{@link TDT4250.sp.impl.CourseImpl#getCredits <em>Credits</em>}</li>
  *   <li>{@link TDT4250.sp.impl.CourseImpl#getLevel <em>Level</em>}</li>
  *   <li>{@link TDT4250.sp.impl.CourseImpl#getOfferedTo <em>Offered To</em>}</li>
+ *   <li>{@link TDT4250.sp.impl.CourseImpl#isAccessToAll <em>Access To All</em>}</li>
  * </ul>
  *
  * @generated
@@ -118,7 +120,7 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String LEVEL_EDEFAULT = null;
+	protected static final Level LEVEL_EDEFAULT = Level.BACHELOR;
 
 	/**
 	 * The cached value of the '{@link #getLevel() <em>Level</em>}' attribute.
@@ -128,7 +130,7 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 	 * @generated
 	 * @ordered
 	 */
-	protected String level = LEVEL_EDEFAULT;
+	protected Level level = LEVEL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOfferedTo() <em>Offered To</em>}' reference list.
@@ -139,6 +141,26 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 	 * @ordered
 	 */
 	protected EList<StudyPlan> offeredTo;
+
+	/**
+	 * The default value of the '{@link #isAccessToAll() <em>Access To All</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAccessToAll()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ACCESS_TO_ALL_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAccessToAll() <em>Access To All</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAccessToAll()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean accessToAll = ACCESS_TO_ALL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -239,7 +261,7 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 
@@ -248,9 +270,9 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLevel(String newLevel) {
-		String oldLevel = level;
-		level = newLevel;
+	public void setLevel(Level newLevel) {
+		Level oldLevel = level;
+		level = newLevel == null ? LEVEL_EDEFAULT : newLevel;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SpPackage.COURSE__LEVEL, oldLevel, level));
 	}
@@ -265,6 +287,27 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			offeredTo = new EObjectResolvingEList<StudyPlan>(StudyPlan.class, this, SpPackage.COURSE__OFFERED_TO);
 		}
 		return offeredTo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAccessToAll() {
+		return accessToAll;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAccessToAll(boolean newAccessToAll) {
+		boolean oldAccessToAll = accessToAll;
+		accessToAll = newAccessToAll;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SpPackage.COURSE__ACCESS_TO_ALL, oldAccessToAll, accessToAll));
 	}
 
 	/**
@@ -287,6 +330,8 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 				return getLevel();
 			case SpPackage.COURSE__OFFERED_TO:
 				return getOfferedTo();
+			case SpPackage.COURSE__ACCESS_TO_ALL:
+				return isAccessToAll();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -314,11 +359,14 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 				setCredits((Float)newValue);
 				return;
 			case SpPackage.COURSE__LEVEL:
-				setLevel((String)newValue);
+				setLevel((Level)newValue);
 				return;
 			case SpPackage.COURSE__OFFERED_TO:
 				getOfferedTo().clear();
 				getOfferedTo().addAll((Collection<? extends StudyPlan>)newValue);
+				return;
+			case SpPackage.COURSE__ACCESS_TO_ALL:
+				setAccessToAll((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -350,6 +398,9 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			case SpPackage.COURSE__OFFERED_TO:
 				getOfferedTo().clear();
 				return;
+			case SpPackage.COURSE__ACCESS_TO_ALL:
+				setAccessToAll(ACCESS_TO_ALL_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -371,9 +422,11 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 			case SpPackage.COURSE__CREDITS:
 				return CREDITS_EDEFAULT == null ? credits != null : !CREDITS_EDEFAULT.equals(credits);
 			case SpPackage.COURSE__LEVEL:
-				return LEVEL_EDEFAULT == null ? level != null : !LEVEL_EDEFAULT.equals(level);
+				return level != LEVEL_EDEFAULT;
 			case SpPackage.COURSE__OFFERED_TO:
 				return offeredTo != null && !offeredTo.isEmpty();
+			case SpPackage.COURSE__ACCESS_TO_ALL:
+				return accessToAll != ACCESS_TO_ALL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -398,6 +451,8 @@ public class CourseImpl extends MinimalEObjectImpl.Container implements Course {
 		result.append(credits);
 		result.append(", level: ");
 		result.append(level);
+		result.append(", accessToAll: ");
+		result.append(accessToAll);
 		result.append(')');
 		return result.toString();
 	}

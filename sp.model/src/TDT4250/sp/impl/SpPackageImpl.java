@@ -6,6 +6,7 @@ import TDT4250.sp.Course;
 import TDT4250.sp.CourseSlot;
 import TDT4250.sp.Department;
 import TDT4250.sp.ElectablesCourseSlot;
+import TDT4250.sp.Level;
 import TDT4250.sp.ObligatoryCourseSlot;
 import TDT4250.sp.Organization;
 import TDT4250.sp.Semester;
@@ -15,6 +16,7 @@ import TDT4250.sp.SpPackage;
 import TDT4250.sp.Status;
 import TDT4250.sp.StudyPlan;
 
+import TDT4250.sp.util.SpValidator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -22,6 +24,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -106,6 +109,13 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EEnum levelEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType creditsEDataType = null;
 
 	/**
@@ -167,6 +177,15 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 
 		// Initialize created meta-data
 		theSpPackage.initializePackageContents();
+
+		// Register package validator
+		EValidator.Registry.INSTANCE.put
+			(theSpPackage,
+			 new EValidator.Descriptor() {
+				 public EValidator getEValidator() {
+					 return SpValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theSpPackage.freeze();
@@ -370,6 +389,15 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCourse_AccessToAll() {
+		return (EAttribute)courseEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSemesterInstance() {
 		return semesterInstanceEClass;
 	}
@@ -514,6 +542,15 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getLevel() {
+		return levelEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getCredits() {
 		return creditsEDataType;
 	}
@@ -579,6 +616,7 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 		createEAttribute(courseEClass, COURSE__CREDITS);
 		createEAttribute(courseEClass, COURSE__LEVEL);
 		createEReference(courseEClass, COURSE__OFFERED_TO);
+		createEAttribute(courseEClass, COURSE__ACCESS_TO_ALL);
 
 		semesterInstanceEClass = createEClass(SEMESTER_INSTANCE);
 		createEReference(semesterInstanceEClass, SEMESTER_INSTANCE__COURSE_SLOTS);
@@ -601,6 +639,7 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 		// Create enums
 		semesterEEnum = createEEnum(SEMESTER);
 		statusEEnum = createEEnum(STATUS);
+		levelEEnum = createEEnum(LEVEL);
 
 		// Create data types
 		creditsEDataType = createEDataType(CREDITS);
@@ -654,15 +693,16 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 		initEReference(getStudyPlan_Semesters(), this.getSemesterInstance(), this.getSemesterInstance_StudyPlan(), "semesters", null, 0, -1, StudyPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStudyPlan_Code(), ecorePackage.getEString(), "code", null, 0, 1, StudyPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStudyPlan_Name(), ecorePackage.getEString(), "name", null, 0, 1, StudyPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStudyPlan_Level(), ecorePackage.getEString(), "level", null, 0, 1, StudyPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStudyPlan_Level(), this.getLevel(), "level", null, 0, 1, StudyPlan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(courseEClass, Course.class, "Course", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCourse_Code(), this.getCourseCode(), "code", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCourse_Name(), ecorePackage.getEString(), "name", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCourse_SemesterOffered(), this.getSemester(), "semesterOffered", null, 0, 2, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCourse_Credits(), this.getCredits(), "credits", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCourse_Level(), ecorePackage.getEString(), "level", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCourse_Level(), this.getLevel(), "level", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCourse_OfferedTo(), this.getStudyPlan(), null, "offeredTo", null, 0, -1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCourse_AccessToAll(), ecorePackage.getEBoolean(), "accessToAll", null, 0, 1, Course.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semesterInstanceEClass, SemesterInstance.class, "SemesterInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSemesterInstance_CourseSlots(), this.getCourseSlot(), this.getCourseSlot_Semester(), "courseSlots", null, 0, -1, SemesterInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -691,12 +731,72 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 		addEEnumLiteral(statusEEnum, Status.OBLIGATORY);
 		addEEnumLiteral(statusEEnum, Status.ELECTABLE);
 
+		initEEnum(levelEEnum, Level.class, "Level");
+		addEEnumLiteral(levelEEnum, Level.BACHELOR);
+		addEEnumLiteral(levelEEnum, Level.MASTERS);
+
 		// Initialize data types
 		initEDataType(creditsEDataType, Float.class, "Credits", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(courseCodeEDataType, String.class, "CourseCode", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+		// http://www.eclipse.org/acceleo/query/1.0
+		create_1Annotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
+		addAnnotation
+		  (this,
+		   source,
+		   new String[] {
+			   "validationDelegates", "http://www.eclipse.org/acceleo/query/1.0"
+		   });
+		addAnnotation
+		  (electablesCourseSlotEClass,
+		   source,
+		   new String[] {
+			   "constraints", "CreditsMatchesCoursesAndSlots"
+		   });
+		addAnnotation
+		  (obligatoryCourseSlotEClass,
+		   source,
+		   new String[] {
+			   "constraints", "CreditsMatchesCourseAndSlot"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/acceleo/query/1.0</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void create_1Annotations() {
+		String source = "http://www.eclipse.org/acceleo/query/1.0";
+		addAnnotation
+		  (electablesCourseSlotEClass,
+		   source,
+		   new String[] {
+			   "CreditsMatchesCoursesAndSlots", null
+		   });
+		addAnnotation
+		  (obligatoryCourseSlotEClass,
+		   source,
+		   new String[] {
+			   "CreditsMatchesCourseAndSlot", "self.course.credits = self.credits"
+		   });
 	}
 
 } //SpPackageImpl

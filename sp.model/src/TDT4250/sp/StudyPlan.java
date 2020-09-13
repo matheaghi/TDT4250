@@ -99,24 +99,27 @@ public interface StudyPlan extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Level</b></em>' attribute.
+	 * The literals are from the enumeration {@link TDT4250.sp.Level}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Level</em>' attribute.
-	 * @see #setLevel(String)
+	 * @see TDT4250.sp.Level
+	 * @see #setLevel(Level)
 	 * @see TDT4250.sp.SpPackage#getStudyPlan_Level()
 	 * @model
 	 * @generated
 	 */
-	String getLevel();
+	Level getLevel();
 
 	/**
 	 * Sets the value of the '{@link TDT4250.sp.StudyPlan#getLevel <em>Level</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Level</em>' attribute.
+	 * @see TDT4250.sp.Level
 	 * @see #getLevel()
 	 * @generated
 	 */
-	void setLevel(String value);
+	void setLevel(Level value);
 
 } // StudyPlan

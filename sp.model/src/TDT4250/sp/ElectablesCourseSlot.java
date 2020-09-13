@@ -17,7 +17,8 @@ import org.eclipse.emf.common.util.EList;
  * </ul>
  *
  * @see TDT4250.sp.SpPackage#getElectablesCourseSlot()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='CreditsMatchesCoursesAndSlots'"
+ *        annotation="http://www.eclipse.org/acceleo/query/1.0 CreditsMatchesCoursesAndSlots='null'"
  * @generated
  */
 public interface ElectablesCourseSlot extends CourseSlot {

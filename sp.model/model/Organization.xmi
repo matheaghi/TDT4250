@@ -12,17 +12,16 @@
     <programmes
         specialization="//@departments.0/@programmes.1 //@departments.0/@programmes.2"
         code="MTDT"
-        name="Computer Science"
-        level="5 year Masters"/>
+        name="Computer Science"/>
     <programmes
         specialization="//@departments.0/@programmes.2"
         code="MTDT"
         name="Software"
-        level="5 year Masters"/>
+        level="Masters"/>
     <programmes
         code="MTDT"
         name="Software Engineering"
-        level="5 year masters">
+        level="Masters">
       <semesters
           year="2020"
           intendedWorkload="30.0">
@@ -75,8 +74,7 @@
         code="TMA4105"
         name="Mathematics 2"
         credits="7.5"
-        level="Bachelors"
-        offeredTo="//@departments.0/@programmes.0 //@departments.0/@programmes.1 //@departments.0/@programmes.2">
+        accessToAll="true">
       <semesterOffered>Autumn</semesterOffered>
       <semesterOffered>Spring</semesterOffered>
     </responsibleFor>
@@ -88,15 +86,16 @@
         code="TSOL425"
         name="Technology Management in Teams"
         credits="7.5"
-        level="Bachelors"
-        offeredTo="//@departments.0/@programmes.0 //@departments.0/@programmes.1 //@departments.0/@programmes.2">
+        level="Masters"
+        accessToAll="true">
       <semesterOffered>Autumn</semesterOffered>
     </responsibleFor>
     <responsibleFor
         code="BEIT4010"
         name="EiT Innovation Skills"
         credits="7.5"
-        level="Masters">
+        level="Masters"
+        accessToAll="true">
       <semesterOffered>Spring</semesterOffered>
     </responsibleFor>
   </departments>
@@ -107,7 +106,8 @@
         code="TFE4850"
         name="EiT Space Technology"
         credits="7.5"
-        level="Masters">
+        level="Masters"
+        accessToAll="true">
       <semesterOffered>Spring</semesterOffered>
     </responsibleFor>
   </departments>

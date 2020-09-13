@@ -16,7 +16,8 @@ package TDT4250.sp;
  * </ul>
  *
  * @see TDT4250.sp.SpPackage#getObligatoryCourseSlot()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='CreditsMatchesCourseAndSlot'"
+ *        annotation="http://www.eclipse.org/acceleo/query/1.0 CreditsMatchesCourseAndSlot='self.course.credits = self.credits'"
  * @generated
  */
 public interface ObligatoryCourseSlot extends CourseSlot {
