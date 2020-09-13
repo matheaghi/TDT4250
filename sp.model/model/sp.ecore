@@ -10,8 +10,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Department">
     <eStructuralFeatures xsi:type="ecore:EReference" name="programmes" upperBound="-1"
         eType="#//StudyPlan" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="courses" upperBound="-1"
-        eType="#//Course" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="abbreviation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -19,28 +17,39 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="specialization" upperBound="-1"
         eType="#//StudyPlan"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="semesters" upperBound="-1"
-        eType="#//SemesterInstance" containment="true"/>
+        eType="#//SemesterInstance" containment="true" eOpposite="#//SemesterInstance/studyPlan"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsibleFor" upperBound="-1"
+        eType="#//Course" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Course">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="#//CourseCode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="semesterOffered" upperBound="2"
         eType="#//Semester"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credits" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credits" eType="#//Credits"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="offeredTo" upperBound="-1"
+        eType="#//StudyPlan"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SemesterInstance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="coursesSlots" upperBound="-1"
-        eType="#//CourseSlot" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="courseSlots" upperBound="-1"
+        eType="#//CourseSlot" containment="true" eOpposite="#//CourseSlot/semester"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="semester" lowerBound="1"
         eType="#//Semester"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="year" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intendedWorkload" eType="#//Credits"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="studyPlan" lowerBound="1"
+        eType="#//StudyPlan" eOpposite="#//StudyPlan/semesters"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CourseSlot" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credits" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="credits" eType="#//Credits"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semester" lowerBound="1"
+        eType="#//SemesterInstance" eOpposite="#//SemesterInstance/courseSlots"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//Status"
+        volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElectablesCourseSlot" eSuperTypes="#//CourseSlot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="courses" lowerBound="2"
@@ -53,5 +62,11 @@
   <eClassifiers xsi:type="ecore:EEnum" name="Semester">
     <eLiterals name="Autumn"/>
     <eLiterals name="Spring" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="Credits" instanceClassName="java.lang.Float"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="CourseCode" instanceClassName="java.lang.String"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Status">
+    <eLiterals name="obligatory"/>
+    <eLiterals name="electable" value="1"/>
   </eClassifiers>
 </ecore:EPackage>
