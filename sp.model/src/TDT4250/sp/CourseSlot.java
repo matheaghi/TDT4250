@@ -76,22 +76,10 @@ public interface CourseSlot extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Status</em>' attribute.
 	 * @see TDT4250.sp.Status
-	 * @see #setStatus(Status)
 	 * @see TDT4250.sp.SpPackage#getCourseSlot_Status()
-	 * @model transient="true" volatile="true" derived="true"
+	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
 	Status getStatus();
-
-	/**
-	 * Sets the value of the '{@link TDT4250.sp.CourseSlot#getStatus <em>Status</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Status</em>' attribute.
-	 * @see TDT4250.sp.Status
-	 * @see #getStatus()
-	 * @generated
-	 */
-	void setStatus(Status value);
 
 } // CourseSlot

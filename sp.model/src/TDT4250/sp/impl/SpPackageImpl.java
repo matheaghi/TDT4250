@@ -714,7 +714,7 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 		initEClass(courseSlotEClass, CourseSlot.class, "CourseSlot", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCourseSlot_Credits(), this.getCredits(), "credits", null, 0, 1, CourseSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCourseSlot_Semester(), this.getSemesterInstance(), this.getSemesterInstance_CourseSlots(), "semester", null, 1, 1, CourseSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getCourseSlot_Status(), this.getStatus(), "status", null, 0, 1, CourseSlot.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCourseSlot_Status(), this.getStatus(), "status", null, 0, 1, CourseSlot.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(electablesCourseSlotEClass, ElectablesCourseSlot.class, "ElectablesCourseSlot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getElectablesCourseSlot_Courses(), this.getCourse(), null, "courses", null, 2, -1, ElectablesCourseSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -767,7 +767,7 @@ public class SpPackageImpl extends EPackageImpl implements SpPackage {
 		  (semesterInstanceEClass,
 		   source,
 		   new String[] {
-			   "constraints", "CourseCreditsSumToWorkload"
+			   "constraints", "CourseCreditsSumToWorkload AllCoursesMustBeOfferedThatSemester MustHaveAccessToAllCourses MustBeValidLevel"
 		   });
 		addAnnotation
 		  (obligatoryCourseSlotEClass,

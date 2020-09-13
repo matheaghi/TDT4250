@@ -40,7 +40,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SemesterInstance">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-      <details key="constraints" value="CourseCreditsSumToWorkload"/>
+      <details key="constraints" value="CourseCreditsSumToWorkload AllCoursesMustBeOfferedThatSemester MustHaveAccessToAllCourses MustBeValidLevel"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/acceleo/query/1.0">
       <details key="CourseCreditsSumToWorkload" value="(self.courseSlots.credits -> sum()).toString()=(self.intendedWorkload).toString()"/>
@@ -59,7 +59,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="semester" lowerBound="1"
         eType="#//SemesterInstance" eOpposite="#//SemesterInstance/courseSlots"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//Status"
-        volatile="true" transient="true" derived="true"/>
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ElectablesCourseSlot" eSuperTypes="#//CourseSlot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="courses" lowerBound="2"

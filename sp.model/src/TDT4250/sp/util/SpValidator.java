@@ -4,10 +4,12 @@ package TDT4250.sp.util;
 
 import TDT4250.sp.*;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -169,6 +171,9 @@ public class SpValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= validate_EveryKeyUnique(semesterInstance, diagnostics, context);
 		if (result || diagnostics != null) result &= validate_EveryMapEntryUnique(semesterInstance, diagnostics, context);
 		if (result || diagnostics != null) result &= validateSemesterInstance_CourseCreditsSumToWorkload(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSemesterInstance_AllCoursesMustBeOfferedThatSemester(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSemesterInstance_MustHaveAccessToAllCourses(semesterInstance, diagnostics, context);
+		if (result || diagnostics != null) result &= validateSemesterInstance_MustBeValidLevel(semesterInstance, diagnostics, context);
 		return result;
 	}
 
@@ -199,6 +204,155 @@ public class SpValidator extends EObjectValidator {
 				 Diagnostic.ERROR,
 				 DIAGNOSTIC_SOURCE,
 				 0);
+	}
+
+	/**
+	 * Validates the AllCoursesMustBeOfferedThatSemester constraint of '<em>Semester Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateSemesterInstance_AllCoursesMustBeOfferedThatSemester(SemesterInstance semesterInstance, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		String semesterToValidate = semesterInstance.getSemester().getName();
+		
+		EList<CourseSlot> cs = semesterInstance.getCourseSlots();
+		boolean valid = true;
+		for (CourseSlot c : cs) {
+			if(c instanceof ObligatoryCourseSlot) {
+				EList<Semester> semester = ((ObligatoryCourseSlot) c).getCourse().getSemesterOffered();
+				if(semester.size() == 2) {
+					continue;
+				}
+				else {
+					if(!semester.get(0).getName().equals(semesterToValidate)) {
+						valid = false;
+					}
+				}
+				
+			}
+			else if (c instanceof ElectablesCourseSlot) {
+				EList<Course> courseList = ((ElectablesCourseSlot) c).getCourses();
+				for (Course course : courseList) {
+					EList<Semester> semester = course.getSemesterOffered();
+					if(semester.size() == 2) {
+						continue;
+					}
+					else {
+						if(!semester.get(0).getName().equals(semesterToValidate)) {
+							valid = false;
+						}
+					}
+				}
+			}
+		}
+		
+		
+		if (valid) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "AllCoursesMustBeOfferedThatSemester", getObjectLabel(semesterInstance, context) },
+						 new Object[] { semesterInstance },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the MustHaveAccessToAllCourses constraint of '<em>Semester Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateSemesterInstance_MustHaveAccessToAllCourses(SemesterInstance semesterInstance, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean valid = true;
+		
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		for( CourseSlot cs : semesterInstance.getCourseSlots()) {
+			if( cs instanceof ObligatoryCourseSlot) {
+				courseList.add(((ObligatoryCourseSlot) cs).getCourse());
+			}
+			else if( cs instanceof ElectablesCourseSlot) {
+				courseList.addAll(((ElectablesCourseSlot) cs).getCourses());
+			}
+		}
+		for (Course course : courseList) {
+			if (!course.isAccessToAll() && !course.getOfferedTo().contains(semesterInstance.getStudyPlan())) {
+				valid = false;
+			}
+		}
+		
+		if (valid) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "MustHaveAccessToAllCourses", getObjectLabel(semesterInstance, context) },
+						 new Object[] { semesterInstance },
+						 context));
+			}
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the MustBeValidLevel constraint of '<em>Semester Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public boolean validateSemesterInstance_MustBeValidLevel(SemesterInstance semesterInstance, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		boolean valid = true;
+		
+		if(semesterInstance.getStudyPlan().getLevel().getName().equals("Masters")) {
+			valid = true;
+		}
+		else {
+
+			ArrayList<Course> courseList = new ArrayList<Course>();
+			for( CourseSlot cs : semesterInstance.getCourseSlots()) {
+				if( cs instanceof ObligatoryCourseSlot) {
+					courseList.add(((ObligatoryCourseSlot) cs).getCourse());
+				}
+				else if( cs instanceof ElectablesCourseSlot) {
+					courseList.addAll(((ElectablesCourseSlot) cs).getCourses());
+				}
+			}
+			for (Course course : courseList) {
+				if(course.getLevel().getName().equals("Masters")) {
+					valid = false;
+				}
+			}
+			
+		}
+		
+		
+		
+		if (valid) {
+			if (diagnostics != null) {
+				diagnostics.add
+					(createDiagnostic
+						(Diagnostic.ERROR,
+						 DIAGNOSTIC_SOURCE,
+						 0,
+						 "_UI_GenericConstraint_diagnostic",
+						 new Object[] { "MustBeValidLevel", getObjectLabel(semesterInstance, context) },
+						 new Object[] { semesterInstance },
+						 context));
+			}
+			return false;
+		}
+		return true;
 	}
 
 	/**

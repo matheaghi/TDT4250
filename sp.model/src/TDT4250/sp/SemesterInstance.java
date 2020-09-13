@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see TDT4250.sp.SpPackage#getSemesterInstance()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='CourseCreditsSumToWorkload'"
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='CourseCreditsSumToWorkload AllCoursesMustBeOfferedThatSemester MustHaveAccessToAllCourses MustBeValidLevel'"
  *        annotation="http://www.eclipse.org/acceleo/query/1.0 CourseCreditsSumToWorkload='(self.courseSlots.credits -&gt; sum()).toString()=(self.intendedWorkload).toString()'"
  * @generated
  */

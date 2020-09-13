@@ -3,6 +3,8 @@
 package TDT4250.sp.impl;
 
 import TDT4250.sp.CourseSlot;
+import TDT4250.sp.ElectablesCourseSlot;
+import TDT4250.sp.ObligatoryCourseSlot;
 import TDT4250.sp.SemesterInstance;
 import TDT4250.sp.SpPackage;
 import TDT4250.sp.Status;
@@ -148,22 +150,15 @@ public abstract class CourseSlotImpl extends MinimalEObjectImpl.Container implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Status getStatus() {
-		// TODO: implement this method to return the 'Status' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatus(Status newStatus) {
-		// TODO: implement this method to set the 'Status' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
+		if(this instanceof ElectablesCourseSlot) {
+			return Status.ELECTABLE;
+		}
+		else if (this instanceof ObligatoryCourseSlot) {
+			return Status.OBLIGATORY;
+		}
 		throw new UnsupportedOperationException();
 	}
 
@@ -243,9 +238,6 @@ public abstract class CourseSlotImpl extends MinimalEObjectImpl.Container implem
 			case SpPackage.COURSE_SLOT__SEMESTER:
 				setSemester((SemesterInstance)newValue);
 				return;
-			case SpPackage.COURSE_SLOT__STATUS:
-				setStatus((Status)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -263,9 +255,6 @@ public abstract class CourseSlotImpl extends MinimalEObjectImpl.Container implem
 				return;
 			case SpPackage.COURSE_SLOT__SEMESTER:
 				setSemester((SemesterInstance)null);
-				return;
-			case SpPackage.COURSE_SLOT__STATUS:
-				setStatus(STATUS_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
