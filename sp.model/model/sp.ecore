@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    name="Organization" nsURI="platform:/plugin/TDT4250.sp.model/model/sp.ecore"
-    nsPrefix="Organization"/>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sp" nsURI="platform:/plugin/TDT4250.sp.model/model/sp.ecore"
+    nsPrefix="sp">
+  <eClassifiers xsi:type="ecore:EClass" name="Organization"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Department"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StudyDirection"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Course"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Semester"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CourseSlot"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ElectablesCourseSlot"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObligatoryCourseSlot"/>
+</ecore:EPackage>
